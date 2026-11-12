@@ -1,0 +1,13 @@
+-r requirements-cuda.txt
+datasets>=4
+pandas
+numpy
+scipy
+scikit-learn
+statsmodels
+httpx
+matplotlib
+pyarrow
+huggingface_hub
+accelerate
+pytest

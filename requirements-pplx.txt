@@ -1,0 +1,11 @@
+torch==2.13.0
+torchvision==0.28.0
+transformers==5.17.0
+accelerate==1.15.0
+pillow
+safetensors
+huggingface_hub
+numpy
+kernels==0.16.1
+flash-linear-attention==0.5.2
+python-dotenv

@@ -1,0 +1,34 @@
+[
+ {
+  "task": "banking77",
+  "source": "PolyAI BANKING77 (GitHub)",
+  "license": "CC BY 4.0",
+  "pool": 10003,
+  "test": 400,
+  "sha256_test": "f4fd7d220db8fcb24421b57d93e5e49a2436773f233dc9bb143d2479246f1e03"
+ },
+ {
+  "task": "bitext",
+  "source": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "license": "CDLA-Sharing-1.0",
+  "pool": 15000,
+  "test": 400,
+  "sha256_test": "ab7ecb1ce6272b7d608b1a10fa0c996b051e451ab3015032802970b128a33211"
+ },
+ {
+  "task": "fomc",
+  "source": "gtfintechlab/fomc_communication",
+  "license": "CC BY-NC 4.0",
+  "pool": 1984,
+  "test": 400,
+  "sha256_test": "563bf035942377cf8c795685eb127d3da4d47a0e1418995ff5fe47d445079a68"
+ },
+ {
+  "task": "tw_topic",
+  "source": "zeroshot/twitter-financial-news-topic",
+  "license": "MIT",
+  "pool": 15000,
+  "test": 400,
+  "sha256_test": "352aba79e15ce6a23d0841417fa1ccb78bbfce0da6990bbe7de074c65e893712"
+ }
+]

@@ -1,0 +1,9 @@
+torch==2.13.0
+torchvision==0.28.0
+transformers==5.10.2
+accelerate
+safetensors
+huggingface_hub
+pillow
+numpy
+flash-linear-attention

@@ -1,0 +1,232 @@
+== reconstruction of example blocks ==
+  banking77: pool_dedup 9590; block mismatches 1 (label-sequence mismatches 0) {'k16_knn': 1}
+     k8_len block length / k8_rand1 block length: mean 1.0000 min 0.9957 max 1.0062
+     FOMC-style check: budget pool sizes [77, 308, 1232]
+  bitext: pool_dedup 12847; block mismatches 1 (label-sequence mismatches 1) {'k8_knn_b1': 1}
+     k8_len block length / k8_rand1 block length: mean 1.0000 min 0.9936 max 1.0062
+     FOMC-style check: budget pool sizes [27, 108, 432]
+  fomc: pool_dedup 1942; block mismatches 4 (label-sequence mismatches 0) {'k2_knn': 1, 'k4_knn': 1, 'k8_knn': 1, 'k16_knn': 1}
+     k8_len block length / k8_rand1 block length: mean 0.9996 min 0.9833 max 1.0127
+     FOMC-style check: budget pool sizes [3, 12, 48]
+  tw_topic: pool_dedup 14789; block mismatches 0 (label-sequence mismatches 0) {}
+     k8_len block length / k8_rand1 block length: mean 1.0000 min 0.9950 max 1.0047
+     FOMC-style check: budget pool sizes [20, 80, 320]
+task        banking77  bitext    fomc  tw_topic
+condition                                      
+k16_knn        0.8656  0.9636  0.4830    0.6006
+k16_rand1      0.0128  0.0342  0.3652    0.0958
+k16_rand2      0.0139  0.0406  0.3744    0.0922
+k2_knn         0.9338  0.9812  0.5562    0.6925
+k2_rand1       0.0112  0.0388  0.3400    0.1013
+k2_rand2       0.0125  0.0375  0.3700    0.0950
+k4_knn         0.9219  0.9800  0.5169    0.6656
+k4_rand1       0.0194  0.0312  0.3662    0.0844
+k4_rand2       0.0169  0.0338  0.3650    0.0919
+k8_knn         0.9044  0.9741  0.5056    0.6319
+k8_knn_b1      0.1088  0.1234  0.3333    0.0797
+k8_knn_b16     0.6850  0.7938  0.3619    0.3028
+k8_knn_b4      0.3366  0.4412  0.3375    0.1756
+k8_rand1       0.0141  0.0403  0.3772    0.0994
+k8_rand2       0.0109  0.0412  0.3738    0.0931
+
+== accuracy gains (retrieved / random vs k0) ==
+     task         model     k0   knn2  knn16  rand16  d_knn2  d_knn16  d_knn16_lo  d_knn16_hi  d_rand16  d_rand16_lo  d_rand16_hi  best_knn  best_knn_k
+banking77           jev 0.8125 0.9625 0.9525  0.8138  0.1500   0.1400      0.1050      0.1775    0.0012      -0.0175       0.0213    0.9625           2
+banking77      pplx_api 0.8100 0.9625 0.9600  0.8250  0.1525   0.1500      0.1150      0.1851    0.0150       0.0000       0.0312    0.9700           4
+banking77          clef 0.9550 0.9775 0.9675  0.9512  0.0225   0.0125     -0.0050      0.0300   -0.0038      -0.0175       0.0100    0.9775           2
+banking77          pplx 0.8200 0.9575 0.9625  0.8250  0.1375   0.1425      0.1075      0.1775    0.0050      -0.0112       0.0225    0.9700           4
+banking77  qwen_readout 0.8000 0.9475 0.9600  0.8062  0.1475   0.1600      0.1225      0.1975    0.0062      -0.0188       0.0312    0.9600          16
+banking77 gemma_readout 0.8100 0.9650 0.9625  0.8038  0.1550   0.1525      0.1150      0.1900   -0.0062      -0.0262       0.0138    0.9650           2
+   bitext           jev 0.9125 0.9900 0.9975  0.9038  0.0775   0.0850      0.0575      0.1150   -0.0088      -0.0338       0.0150    0.9975          16
+   bitext      pplx_api 0.9350 0.9925 0.9975  0.9538  0.0575   0.0625      0.0400      0.0875    0.0188       0.0025       0.0362    0.9975           4
+   bitext          clef 0.9150 0.9775 0.9950  0.9350  0.0625   0.0800      0.0525      0.1100    0.0200       0.0000       0.0412    0.9950          16
+   bitext          pplx 0.9375 0.9925 0.9975  0.9588  0.0550   0.0600      0.0375      0.0850    0.0213       0.0038       0.0400    0.9975           4
+   bitext  qwen_readout 0.9225 0.9875 0.9950  0.9312  0.0650   0.0725      0.0475      0.1000    0.0088      -0.0138       0.0312    0.9950          16
+   bitext gemma_readout 0.9250 0.9900 0.9950  0.9138  0.0650   0.0700      0.0450      0.0975   -0.0112      -0.0338       0.0112    0.9950           8
+     fomc           jev 0.6775 0.6950 0.7050  0.6550  0.0175   0.0275     -0.0125      0.0675   -0.0225      -0.0525       0.0062    0.7100           4
+     fomc      pplx_api 0.6175 0.6750 0.7225  0.6638  0.0575   0.1050      0.0600      0.1500    0.0462       0.0188       0.0738    0.7225          16
+     fomc          clef 0.6175 0.6500 0.6875  0.6150  0.0325   0.0700      0.0300      0.1100   -0.0025      -0.0275       0.0238    0.6875          16
+     fomc          pplx 0.6175 0.6750 0.7250  0.6562  0.0575   0.1075      0.0625      0.1550    0.0388       0.0112       0.0662    0.7250          16
+     fomc  qwen_readout 0.6500 0.6750 0.6875  0.6425  0.0250   0.0375      0.0000      0.0750   -0.0075      -0.0400       0.0238    0.6875          16
+     fomc gemma_readout 0.6150 0.6925 0.7150  0.6487  0.0775   0.1000      0.0575      0.1450    0.0338      -0.0038       0.0725    0.7150          16
+ tw_topic           jev 0.6925 0.8050 0.8350  0.7263  0.1125   0.1425      0.1025      0.1850    0.0338       0.0025       0.0650    0.8500           8
+ tw_topic      pplx_api 0.7300 0.8200 0.8750  0.7675  0.0900   0.1450      0.1025      0.1875    0.0375       0.0112       0.0638    0.8750          16
+ tw_topic          clef 0.7425 0.8325 0.8725  0.7712  0.0900   0.1300      0.0900      0.1700    0.0288       0.0012       0.0575    0.8750           8
+ tw_topic          pplx 0.7400 0.8200 0.8700  0.7700  0.0800   0.1300      0.0875      0.1725    0.0300       0.0025       0.0575    0.8700          16
+ tw_topic  qwen_readout 0.7200 0.8300 0.8500  0.7462  0.1100   0.1300      0.0850      0.1725    0.0262       0.0025       0.0500    0.8575           8
+ tw_topic gemma_readout 0.7075 0.8350 0.8750  0.7588  0.1275   0.1675      0.1225      0.2125    0.0512       0.0188       0.0838    0.8750          16
+  banking77: d_knn16 range 0.0125..0.1600; d_knn2 range 0.0225..0.1550; d_rand16 range -0.0063..0.0150; best-k gain range 0.0225..0.1600; knn16 CI excl 0: 5/6; rand16 CI excl 0: 0/6 []
+  bitext: d_knn16 range 0.0600..0.0850; d_knn2 range 0.0550..0.0775; d_rand16 range -0.0112..0.0213; best-k gain range 0.0600..0.0850; knn16 CI excl 0: 6/6; rand16 CI excl 0: 2/6 [['pplx_api', 0.01875], ['pplx', 0.02125]]
+  fomc: d_knn16 range 0.0275..0.1075; d_knn2 range 0.0175..0.0775; d_rand16 range -0.0225..0.0462; best-k gain range 0.0325..0.1075; knn16 CI excl 0: 4/6; rand16 CI excl 0: 2/6 [['pplx_api', 0.04625], ['pplx', 0.03875]]
+  tw_topic: d_knn16 range 0.1300..0.1675; d_knn2 range 0.0800..0.1275; d_rand16 range 0.0262..0.0512; best-k gain range 0.1300..0.1675; knn16 CI excl 0: 6/6; rand16 CI excl 0: 6/6 [['jev', 0.03375], ['pplx_api', 0.0375], ['clef', 0.02875], ['pplx', 0.03], ['qwen_readout', 0.02625], ['gemma_readout', 0.05125]]
+  share of the k16 retrieved gain already reached at k = 2 (tasks with gain >= 0.05): {'banking77': {'min': 0.922, 'median': 1.016, 'max': 1.071}, 'bitext': {'min': 0.781, 'median': 0.914, 'max': 0.929}, 'fomc': {'min': 0.464, 'median': 0.541, 'max': 0.775}, 'tw_topic': {'min': 0.615, 'median': 0.727, 'max': 0.846}}
+  mean over the six systems, retrieved accuracy by k: {'banking77': {'k0': 0.8346, 'knn2': 0.9621, 'knn4': 0.9638, 'knn8': 0.96, 'knn16': 0.9608}, 'bitext': {'k0': 0.9246, 'knn2': 0.9883, 'knn4': 0.9921, 'knn8': 0.9938, 'knn16': 0.9962}, 'fomc': {'k0': 0.6325, 'knn2': 0.6771, 'knn4': 0.6888, 'knn8': 0.6971, 'knn16': 0.7071}, 'tw_topic': {'k0': 0.7221, 'knn2': 0.8238, 'knn4': 0.8392, 'knn8': 0.8646, 'knn16': 0.8629}}
+  mean over the six systems, random accuracy by k: {'banking77': {'k0': 0.8346, 'rand2': 0.831, 'rand4': 0.835, 'rand8': 0.835, 'rand16': 0.8375}, 'bitext': {'k0': 0.9246, 'rand2': 0.9229, 'rand4': 0.9283, 'rand8': 0.9279, 'rand16': 0.9327}, 'fomc': {'k0': 0.6325, 'rand2': 0.6288, 'rand4': 0.6273, 'rand8': 0.6377, 'rand16': 0.6469}, 'tw_topic': {'k0': 0.7221, 'rand2': 0.7365, 'rand4': 0.7304, 'rand8': 0.7406, 'rand16': 0.7567}}
+
+== decision churn ==
+     task         model  flip_rand_k2  flip_rand_k8  flip_rand_k16  flip_len_vs_k0  accgap_rand_k8  accgap_rand_k16
+banking77           jev        0.0725        0.0975         0.0975          0.0650          0.0100           0.0175
+banking77      pplx_api        0.0525        0.0575         0.0550          0.0300          0.0050           0.0050
+banking77          clef        0.0225        0.0275         0.0200          0.0100          0.0025           0.0025
+banking77          pplx        0.0525        0.0650         0.0550          0.0125          0.0025           0.0100
+banking77  qwen_readout        0.0800        0.0900         0.0925          0.0550          0.0125           0.0075
+banking77 gemma_readout        0.0575        0.0800         0.0925          0.0250          0.0075           0.0125
+   bitext           jev        0.0400        0.0800         0.1000          0.0575          0.0175           0.0375
+   bitext      pplx_api        0.0350        0.0500         0.0425          0.0175          0.0050           0.0125
+   bitext          clef        0.0400        0.0600         0.0550          0.0200          0.0050           0.0150
+   bitext          pplx        0.0350        0.0525         0.0425          0.0175          0.0025           0.0025
+   bitext  qwen_readout        0.0425        0.0875         0.0575          0.0400          0.0100           0.0225
+   bitext gemma_readout        0.0425        0.0950         0.0900          0.0325          0.0100           0.0175
+     fomc           jev        0.1525        0.1075         0.1000          0.0750          0.0050           0.0000
+     fomc      pplx_api        0.1625        0.1450         0.1150          0.0475          0.0100           0.0225
+     fomc          clef        0.0775        0.0775         0.0625          0.0400          0.0100           0.0050
+     fomc          pplx        0.1450        0.1500         0.1125          0.0475          0.0175           0.0225
+     fomc  qwen_readout        0.1000        0.1100         0.1000          0.0750          0.0075           0.0050
+     fomc gemma_readout        0.1250        0.1125         0.1350          0.1650          0.0125           0.0125
+ tw_topic           jev        0.1150        0.1225         0.1750          0.0675          0.0100           0.0025
+ tw_topic      pplx_api        0.0925        0.1300         0.1400          0.0425          0.0075           0.0200
+ tw_topic          clef        0.0875        0.1200         0.1475          0.0875          0.0175           0.0025
+ tw_topic          pplx        0.0900        0.1425         0.1425          0.0450          0.0050           0.0250
+ tw_topic  qwen_readout        0.0800        0.1300         0.1375          0.1050          0.0175           0.0225
+ tw_topic gemma_readout        0.1300        0.1725         0.2050          0.0900          0.0200           0.0075
+  flip rand1 vs rand2 range per k: {2: (np.float64(0.0225), np.float64(0.1625)), 4: (np.float64(0.025), np.float64(0.1625)), 8: (np.float64(0.0275), np.float64(0.1725)), 16: (np.float64(0.02), np.float64(0.205))}
+  max |acc rand1 - rand2| per k: {2: np.float64(0.0275), 4: np.float64(0.0275), 8: np.float64(0.02), 16: np.float64(0.0375)}  at ['bitext', 'jev']
+  flip k8_len vs k0 range: 0.01 0.165
+  flips by task (mean over systems): {'banking77': {'flip_rand_k8': 0.0696, 'flip_len_vs_k0': 0.0329}, 'bitext': {'flip_rand_k8': 0.0708, 'flip_len_vs_k0': 0.0308}, 'fomc': {'flip_rand_k8': 0.1171, 'flip_len_vs_k0': 0.075}, 'tw_topic': {'flip_rand_k8': 0.1362, 'flip_len_vs_k0': 0.0729}}
+
+== cost per 1,000 decisions (mean over the four tasks) ==
+condition          k0  k16_knn  k8_knn  k8_len
+model                                         
+clef           0.0958   0.1750  0.1254  0.1259
+gemma_readout  0.1455   0.2724  0.2081  0.2215
+jev            0.0367   0.0580  0.0474  0.0489
+pplx           0.0545   0.1234  0.0893  0.0899
+pplx_api       0.0090   0.0190  0.0141  0.0149
+qwen_readout   1.6920   3.0393  2.8046  3.2178
+condition         k0  k16_knn  k8_knn  k8_len
+model                                        
+clef             0.0      0.0     0.0     0.0
+gemma_readout  519.3   1037.4   780.6   820.0
+jev            873.1   1380.1  1128.3  1164.5
+pplx             0.0      0.0     0.0     0.0
+pplx_api       451.3    950.9   703.3   746.5
+qwen_readout   473.3    972.9   725.3   768.5
+        model      task     k0  k8_knn  k16_knn    tok_k0  tok_k8_knn  tok_k16_knn
+          jev banking77 0.0711  0.0784   0.0855 1693.6950   1866.8700    2036.4000
+          jev    bitext 0.0294  0.0354   0.0413  701.0675    843.1600     983.6150
+          jev      fomc 0.0183  0.0321   0.0460  434.6925    764.9250    1094.2550
+          jev  tw_topic 0.0278  0.0436   0.0591  662.9950   1038.2550    1406.1850
+     pplx_api banking77 0.0194  0.0228   0.0261  967.6550   1138.1800    1304.1550
+     pplx_api    bitext 0.0065  0.0093   0.0121  323.9675    465.3200     603.9950
+     pplx_api      fomc 0.0041  0.0106   0.0171  203.1725    530.2675     855.4575
+     pplx_api  tw_topic 0.0062  0.0136   0.0208  310.3450    679.3325    1040.1350
+         clef banking77 0.2054  0.2260   0.3085    0.0000      0.0000       0.0000
+         clef    bitext 0.0705  0.0907   0.1111    0.0000      0.0000       0.0000
+         clef      fomc 0.0413  0.0738   0.1194    0.0000      0.0000       0.0000
+         clef  tw_topic 0.0659  0.1111   0.1610    0.0000      0.0000       0.0000
+         pplx banking77 0.1146  0.1376   0.1643    0.0000      0.0000       0.0000
+         pplx    bitext 0.0380  0.0559   0.0731    0.0000      0.0000       0.0000
+         pplx      fomc 0.0271  0.0742   0.1200    0.0000      0.0000       0.0000
+         pplx  tw_topic 0.0384  0.0896   0.1364    0.0000      0.0000       0.0000
+ qwen_readout banking77 3.2789  4.9134   6.4005 1078.6550   1249.1800    1415.1550
+ qwen_readout    bitext 1.8791  2.9818   3.7889  334.9675    476.3200     614.9950
+ qwen_readout      fomc 0.1516  0.4114   0.4354  172.1725    499.2675     824.4575
+ qwen_readout  tw_topic 1.4584  2.9117   1.5325  307.3450    676.3325    1037.1350
+gemma_readout banking77 0.3728  0.4111   0.4659 1220.8600   1408.4125    1591.3675
+gemma_readout    bitext 0.1009  0.1390   0.1783  366.9900    517.2350     664.7925
+gemma_readout      fomc 0.0222  0.1019   0.1676  174.1625    501.2525     826.5400
+gemma_readout  tw_topic 0.0860  0.1804   0.2777  315.2125    695.4550    1067.0625
+  jev: token ratio k16_knn/k0 per task [1.202, 1.403, 2.517, 2.121]
+  pplx_api: token ratio k16_knn/k0 per task [1.348, 1.864, 4.21, 3.352]
+  qwen_readout banking77: mean latency all conditions 7.132 s; k0 4.722; k16_knn 9.217
+  qwen_readout bitext: mean latency all conditions 3.883 s; k0 2.706; k16_knn 5.456
+  qwen_readout fomc: mean latency all conditions 0.510 s; k0 0.218; k16_knn 0.627
+  qwen_readout tw_topic: mean latency all conditions 3.456 s; k0 2.100; k16_knn 2.207
+
+== automation coverage at <= 2% error, threshold policy (ties not split) ==
+task          banking77                  bitext                   fomc                 tw_topic                
+condition            k0 k16_knn  k8_knn      k0 k16_knn k8_knn      k0 k16_knn  k8_knn       k0 k16_knn  k8_knn
+model                                                                                                          
+clef             0.9350  0.9600  0.9700  0.7575     1.0    1.0  0.1475  0.1525  0.1275   0.0800  0.5350  0.5475
+embedlr_full     0.9075     NaN     NaN  1.0000     NaN    NaN  0.0525     NaN     NaN   0.5675     NaN     NaN
+gemma_readout    0.0000  0.1875  0.2700  0.0000     1.0    1.0  0.0000  0.0000  0.0000   0.0000  0.0000  0.0000
+jev              0.0000  0.9250  0.8700  0.7600     1.0    1.0  0.0000  0.0000  0.0000   0.0000  0.4025  0.5075
+modernbert       0.9425     NaN     NaN  1.0000     NaN    NaN  0.1075     NaN     NaN   0.8100     NaN     NaN
+pplx             0.1775  0.9575  0.9450  0.9075     1.0    1.0  0.1300  0.2075  0.1750   0.0150  0.5625  0.5475
+pplx_api         0.1350  0.9650  0.9500  0.9175     1.0    1.0  0.0900  0.2000  0.1625   0.0125  0.5275  0.5400
+qwen_readout     0.1525  0.9100  0.8875  0.7950     1.0    1.0  0.1625  0.0550  0.1150   0.0075  0.4650  0.4100
+
+== nearest-label baseline (vote over the shown examples; 1-NN = most similar example) ==
+     task  condition  k_shown  one_nn   vote  vote_cov_2pct  sys_min  sys_max  n_above  n_below
+banking77     k2_knn        2  0.9450 0.9450         0.0000   0.9475   0.9775        2        0
+banking77     k8_knn        8  0.9450 0.9475         0.8975   0.9500   0.9725        1        0
+banking77    k16_knn       16  0.9450 0.9350         0.8725   0.9525   0.9675        5        0
+banking77  k8_knn_b1        8  0.5400 0.5400         0.0000   0.8350   0.9400        6        0
+banking77  k8_knn_b4        8  0.7400 0.6700         0.0000   0.8675   0.9425        6        0
+banking77 k8_knn_b16        8  0.8800 0.8850         0.3950   0.9325   0.9500        6        0
+   bitext     k2_knn        2  0.9800 0.9800         0.9775   0.9775   0.9925        4        0
+   bitext     k8_knn        8  0.9800 0.9875         1.0000   0.9900   0.9975        2        0
+   bitext    k16_knn       16  0.9800 0.9850         1.0000   0.9950   0.9975        3        0
+   bitext  k8_knn_b1        8  0.7350 0.7350         0.0000   0.9400   0.9675        6        0
+   bitext  k8_knn_b4        8  0.8375 0.8300         0.0000   0.9750   0.9900        6        0
+   bitext k8_knn_b16        8  0.9300 0.9175         0.7175   0.9875   0.9950        6        0
+     fomc     k2_knn        2  0.5650 0.5650         0.0000   0.6500   0.6950        6        0
+     fomc     k8_knn        8  0.5650 0.6150         0.0000   0.6700   0.7100        6        0
+     fomc    k16_knn       16  0.5650 0.6100         0.0200   0.6875   0.7250        6        0
+     fomc  k8_knn_b1        3  0.3150 0.3150         0.0000   0.6100   0.6475        6        0
+     fomc  k8_knn_b4        8  0.4300 0.3775         0.0000   0.6175   0.6725        6        0
+     fomc k8_knn_b16        8  0.4500 0.4200         0.0000   0.6375   0.6575        6        0
+ tw_topic     k2_knn        2  0.7050 0.7050         0.0000   0.8050   0.8350        6        0
+ tw_topic     k8_knn        8  0.7050 0.7350         0.2275   0.8500   0.8750        6        0
+ tw_topic    k16_knn       16  0.7050 0.7675         0.2850   0.8350   0.8750        6        0
+ tw_topic  k8_knn_b1        8  0.1750 0.1750         0.0000   0.7075   0.7525        6        0
+ tw_topic  k8_knn_b4        8  0.3475 0.3625         0.0000   0.7200   0.7800        6        0
+ tw_topic k8_knn_b16        8  0.4250 0.4725         0.0000   0.7300   0.7750        6        0
+
+== SetFit-style classifiers (contrastive fine-tuning of the same encoder on the same budget pools) ==
+     task  budget  setfit_acc  setfit_mean_conf  embedlr_acc  best_clf best_clf_is  prompted_min  prompted_max  n_above_best  n_tie_best  n_below_best  train_size  pairs  train_s  loss_first  loss_last
+banking77       1      0.2800            0.0349       0.5550    0.5550     embedlr        0.8350        0.9400             6           0             0          77   3080     56.5      0.0453     0.0010
+banking77       4      0.6800            0.5297       0.7800    0.7800     embedlr        0.8675        0.9425             6           0             0         308  12320    217.8      0.0953     0.0044
+banking77      16      0.8600            0.8132       0.9050    0.9050     embedlr        0.9325        0.9500             6           0             0        1232  49280    852.3      0.0748     0.0050
+   bitext       1      0.4300            0.0812       0.7750    0.7750     embedlr        0.9400        0.9675             6           0             0          27   1080     18.6      0.0746     0.0015
+   bitext       4      0.9325            0.7857       0.9100    0.9325      setfit        0.9750        0.9900             6           0             0         108   4320     76.0      0.0927     0.0006
+   bitext      16      0.9900            0.9527       0.9875    0.9900      setfit        0.9875        0.9950             4           1             1         432  17280    309.3      0.0615     0.0006
+     fomc       1      0.3275            0.4088       0.3050    0.3275      setfit        0.6100        0.6475             6           0             0           3    120      2.8      0.1238     0.0016
+     fomc       4      0.3850            0.6849       0.4850    0.4850     embedlr        0.6175        0.6725             6           0             0          12    480      9.3      0.2666     0.0012
+     fomc      16      0.5525            0.8822       0.5075    0.5525      setfit        0.6375        0.6575             6           0             0          48   1920     33.8      0.2747     0.0001
+ tw_topic       1      0.0650            0.0688       0.2125    0.2125     embedlr        0.7075        0.7525             6           0             0          20    800     14.0      0.0378     0.0011
+ tw_topic       4      0.5650            0.5694       0.4900    0.5650      setfit        0.7200        0.7800             6           0             0          80   3200     55.7      0.1903     0.0007
+ tw_topic      16      0.7675            0.8499       0.6400    0.7675      setfit        0.7300        0.7750             2           0             4         320  12800    203.8      0.1374     0.0002
+prompted minus SetFit, 16 per class:
+     task  budget         model  diff_vs_setfit      lo     hi  diff_vs_best  lo_best  hi_best
+banking77      16           jev          0.0725  0.0425 0.1025        0.0275   0.0050   0.0500
+banking77      16      pplx_api          0.0900  0.0600 0.1200        0.0450   0.0225   0.0700
+banking77      16          clef          0.0800  0.0475 0.1125        0.0350   0.0100   0.0625
+banking77      16          pplx          0.0900  0.0600 0.1200        0.0450   0.0225   0.0700
+banking77      16  qwen_readout          0.0750  0.0425 0.1075        0.0300   0.0075   0.0550
+banking77      16 gemma_readout          0.0800  0.0475 0.1125        0.0350   0.0100   0.0600
+   bitext      16           jev          0.0050 -0.0050 0.0150        0.0050  -0.0050   0.0150
+   bitext      16      pplx_api          0.0050 -0.0050 0.0150        0.0050  -0.0050   0.0150
+   bitext      16          clef          0.0000 -0.0125 0.0125        0.0000  -0.0125   0.0125
+   bitext      16          pplx          0.0050 -0.0050 0.0150        0.0050  -0.0050   0.0150
+   bitext      16  qwen_readout         -0.0025 -0.0125 0.0075       -0.0025  -0.0125   0.0075
+   bitext      16 gemma_readout          0.0025 -0.0075 0.0125        0.0025  -0.0075   0.0125
+     fomc      16           jev          0.1050  0.0525 0.1575        0.1050   0.0525   0.1575
+     fomc      16      pplx_api          0.0950  0.0400 0.1500        0.0950   0.0400   0.1500
+     fomc      16          clef          0.0975  0.0425 0.1550        0.0975   0.0425   0.1550
+     fomc      16          pplx          0.1000  0.0450 0.1550        0.1000   0.0450   0.1550
+     fomc      16  qwen_readout          0.0975  0.0425 0.1550        0.0975   0.0425   0.1550
+     fomc      16 gemma_readout          0.0850  0.0300 0.1400        0.0850   0.0300   0.1400
+ tw_topic      16           jev         -0.0375 -0.0850 0.0100       -0.0375  -0.0850   0.0100
+ tw_topic      16      pplx_api          0.0075 -0.0350 0.0525        0.0075  -0.0350   0.0525
+ tw_topic      16          clef          0.0050 -0.0400 0.0500        0.0050  -0.0400   0.0500
+ tw_topic      16          pplx         -0.0050 -0.0500 0.0400       -0.0050  -0.0500   0.0400
+ tw_topic      16  qwen_readout         -0.0250 -0.0725 0.0200       -0.0250  -0.0725   0.0200
+ tw_topic      16 gemma_readout         -0.0300 -0.0775 0.0150       -0.0300  -0.0775   0.0150
+SetFit training time total 1849.9 s
+prompted vs the better classifier (significant above / below):
+        above_sig  below_sig   n
+budget                          
+1              24          0  24
+4              24          0  24
+16             12          0  24

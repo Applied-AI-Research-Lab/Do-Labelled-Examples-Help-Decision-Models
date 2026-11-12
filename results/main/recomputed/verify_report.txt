@@ -1,0 +1,105 @@
+== coverage ==
+files: 428  all 400 answered: True  unresolved errors: 0  duplicate rows (rows > unique ids): 0  records 400 each: True
+decisions per decision system: {'jev': 27200, 'pplx_api': 27200, 'clef': 27200, 'pplx': 27200, 'qwen_readout': 27200, 'gemma_readout': 27200}
+decisions per classifier: {'embedlr_b1': 1600, 'embedlr_b4': 1600, 'embedlr_b16': 1600, 'embedlr_full': 1600, 'modernbert': 1600}
+
+== main.csv ==  rows orig 428 recomputed 428 merged 428
+  n                  max|diff| = 0
+  accuracy           max|diff| = 0
+  macro_f1           max|diff| = 1.11e-16
+  ece                max|diff| = 0.01
+  brier              max|diff| = 1.11e-16
+  nll                max|diff| = 4.44e-16
+  aurc               max|diff| = 9.87e-17
+  cov_at_2pct_risk   max|diff| = 0
+  input_tokens_mean  max|diff| = 0
+  usd_per_1k         max|diff| = 8.88e-16
+  ECE cells differing (tie order): 24
+  frozen ECE within random-tie range: 428 / 428  max range 0.015 at ['jev', 'fomc', 'k2_rand1']
+    jev            max tie range 0.0150
+    pplx_api       max tie range 0.0000
+    clef           max tie range 0.0000
+    pplx           max tie range 0.0000
+    qwen_readout   max tie range 0.0000
+    gemma_readout  max tie range 0.0000
+    embedlr_b1     max tie range 0.0000
+    embedlr_b4     max tie range 0.0000
+    embedlr_b16    max tie range 0.0000
+    embedlr_full   max tie range 0.0000
+    modernbert     max tie range 0.0000
+
+== curves.csv == rows 240  max|acc diff| 1.1102230246251565e-16  max|ece diff| (vs orig per-cell ECE) 5.551115123125783e-17
+
+== dip.csv == tests 96
+  ece_increase  max|diff| = 0.0081
+  lo            max|diff| = 0.00205
+  hi            max|diff| = 0.00147
+  p_one_sided   max|diff| = 0.0055
+  p_holm        max|diff| = 0
+  significant after Holm (orig / recomputed): 0 / 0   min p_holm orig 1.0  min p_one_sided orig 0.016
+  ECE increase > 0 (orig): 20 of 96
+  mean ECE change k2_rand1: orig -0.0089  recomputed -0.0090  (n=24, >0: 10; mean of main.csv diffs -0.0089)
+  mean ECE change k2_knn: orig -0.0446  recomputed -0.0450  (n=24, >0: 1; mean of main.csv diffs -0.0446)
+  mean ECE change k4_rand1: orig -0.0068  recomputed -0.0072  (n=24, >0: 9; mean of main.csv diffs -0.0068)
+  mean ECE change k4_knn: orig -0.0526  recomputed -0.0528  (n=24, >0: 0; mean of main.csv diffs -0.0526)
+
+== length.csv == rows 48  max|diff| acc/lo/hi: [0.0, 0.0, 0.0]
+  vs k0: CI excludes 0 for [['jev', 'bitext', -0.025, -0.05, -0.0025], ['qwen_readout', 'bitext', -0.0275, -0.0475, -0.01]]
+  vs k8_rand1: CI excludes 0 for [['pplx', 'bitext', -0.0275, -0.0475, -0.0075], ['qwen_readout', 'bitext', -0.035, -0.06, -0.0125], ['qwen_readout', 'tw_topic', -0.045, -0.0775, -0.0125]]
+
+== regression.csv == rows 12  n_obs per model [20800]
+  coef max|diff| = 1.91e-15
+  lo   max|diff| = 1.07e-14
+  hi   max|diff| = 1.44e-14
+  p max rel diff = 1.290545082162849e-11
+  statsmodels cross-check max|coef diff| = 1.3686968225457008e-15
+
+== budget.csv == max|diff| 0.0
+  ICL min > classifier at budgets 1/4/16: False
+     task budget_per_class  classifier_acc  icl_min  icl_max
+banking77                1          0.5550   0.8350   0.9400
+banking77                4          0.7800   0.8675   0.9425
+banking77               16          0.9050   0.9325   0.9500
+banking77             full          0.9600   0.9500   0.9725
+   bitext                1          0.7750   0.9400   0.9675
+   bitext                4          0.9100   0.9750   0.9900
+   bitext               16          0.9875   0.9875   0.9950
+   bitext             full          0.9925   0.9900   0.9975
+     fomc                1          0.3050   0.6100   0.6475
+     fomc                4          0.4850   0.6175   0.6725
+     fomc               16          0.5075   0.6375   0.6575
+     fomc             full          0.6500   0.6700   0.7100
+ tw_topic                1          0.2125   0.7075   0.7525
+ tw_topic                4          0.4900   0.7200   0.7800
+ tw_topic               16          0.6400   0.7300   0.7750
+ tw_topic             full          0.8375   0.8500   0.8750
+
+== run facts ==
+  jev: requests 27200, input tokens 30,128,819, cost $1.2654
+  pplx_api: requests 27200, input tokens 18,588,752, cost $0.3718
+  GPU-h by model: {'clef': np.float64(1.337), 'pplx': np.float64(0.902), 'qwen_readout': np.float64(28.298), 'gemma_readout': np.float64(2.223), 'embedlr_b1': np.float64(0.0), 'embedlr_b4': np.float64(0.0), 'embedlr_b16': np.float64(0.0), 'embedlr_full': np.float64(0.0), 'modernbert': np.float64(0.001)}  total 32.761
+  qwen_readout mass: n 27200, min 0.9037, < 0.95: 6, min>=0.9998? False
+  gemma_readout mass: n 27200, min 0.9976, < 0.95: 0, min>=0.9998? False
+    qwen_readout banking77 mean latency k0 4.722s, all conditions 7.132s
+    qwen_readout bitext mean latency k0 2.706s, all conditions 3.883s
+    qwen_readout fomc mean latency k0 0.218s, all conditions 0.510s
+    qwen_readout tw_topic mean latency k0 2.100s, all conditions 3.456s
+  hosted vs local Perplexity agreement 0.9840 (n=27200); max |acc diff| per task x condition 0.0150
+
+== data facts ==
+  banking77: pool 10003, dedup 9590 (recomputed keep 9590), test 400, labels 77, test classes present 77, exact-text overlap test/dedup 0
+     label share {'k8_knn': (0.9043, [7, 8]), 'k8_rand1': (0.0141, [7, 8]), 'k8_rand2': (0.0109, [7, 8]), 'k8_knn_b1': (0.1087, [8]), 'k8_knn_b4': (0.3366, [8]), 'k8_knn_b16': (0.6858, [6, 7, 8]), 'k2_knn': (0.9337, [2]), 'k16_knn': (0.8656, [15, 16])}
+     k8_len / k8_rand1 block-length ratio: mean 1.0000, min 0.9957, max 1.0062
+     mean tokens Jev k0 1693.7, k8_knn 1866.9, k16_knn 2036.4; pplx_api k0 967.7, k16_knn 1304.2
+  bitext: pool 15000, dedup 12847 (recomputed keep 12847), test 400, labels 27, test classes present 27, exact-text overlap test/dedup 0
+     label share {'k8_knn': (0.9741, [8]), 'k8_rand1': (0.0403, [8]), 'k8_rand2': (0.0413, [8]), 'k8_knn_b1': (0.1234, [8]), 'k8_knn_b4': (0.4412, [8]), 'k8_knn_b16': (0.7937, [8]), 'k2_knn': (0.9812, [2]), 'k16_knn': (0.9636, [16])}
+     k8_len / k8_rand1 block-length ratio: mean 1.0000, min 0.9936, max 1.0062
+     mean tokens Jev k0 701.1, k8_knn 843.2, k16_knn 983.6; pplx_api k0 324.0, k16_knn 604.0
+  fomc: pool 1984, dedup 1942 (recomputed keep 1942), test 400, labels 3, test classes present 3, exact-text overlap test/dedup 0
+     label share {'k8_knn': (0.5056, [8]), 'k8_rand1': (0.3772, [8]), 'k8_rand2': (0.3738, [8]), 'k8_knn_b1': (0.3333, [3]), 'k8_knn_b4': (0.3375, [8]), 'k8_knn_b16': (0.3619, [8]), 'k2_knn': (0.5563, [2]), 'k16_knn': (0.483, [16])}
+     k8_len / k8_rand1 block-length ratio: mean 0.9996, min 0.9833, max 1.0127
+     mean tokens Jev k0 434.7, k8_knn 764.9, k16_knn 1094.3; pplx_api k0 203.2, k16_knn 855.5
+  tw_topic: pool 15000, dedup 14789 (recomputed keep 14789), test 400, labels 20, test classes present 20, exact-text overlap test/dedup 0
+     label share {'k8_knn': (0.6319, [8]), 'k8_rand1': (0.0994, [8]), 'k8_rand2': (0.0931, [8]), 'k8_knn_b1': (0.0797, [8]), 'k8_knn_b4': (0.1756, [8]), 'k8_knn_b16': (0.3028, [8]), 'k2_knn': (0.6925, [2]), 'k16_knn': (0.6006, [16])}
+     k8_len / k8_rand1 block-length ratio: mean 1.0000, min 0.9950, max 1.0047
+     mean tokens Jev k0 663.0, k8_knn 1038.3, k16_knn 1406.2; pplx_api k0 310.3, k16_knn 1040.1
